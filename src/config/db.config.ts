@@ -16,12 +16,9 @@ export const ConnectDB = async () => {
 
     isConnected = !!db.connections[0].readyState;
     console.log("Connected to MongoDB");
-
-    // await mongoose.connect(`${process.env.DB_URI}`);
-    // console.log(`the DB is connected with ${mongoose.connection.host}`);
   } catch (error) {
     console.error("Failed to connect to MongoDB:", error);
-    throw new Error("Database connection failed");
     // mongoose.disconnect();
+    throw new Error("Database connection failed");
   }
 };

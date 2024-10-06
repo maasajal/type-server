@@ -32,3 +32,23 @@ export const getUser = async (req: Request, res: Response) => {
     res.status(200).send(users);
   } else res.status(404).send({ Error: "Users not found!" });
 };
+
+export const updateUserByEmail = async (req: Request, res: Response) => {
+  try {
+    const email = req.params.email;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const updatedFields = req.body;
+    Object.assign(user, updatedFields);
+    await user.save();
+
+    if (user) {
+      res.status(200).send({ message: `${email} User's data updated` });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(404).send({ Error: "Users not found!" });
+  }
+};
