@@ -1,7 +1,5 @@
-import { log } from "console";
 import "dotenv/config";
-import mongoose, { connect, connections } from "mongoose";
-import { env } from "process";
+import mongoose from "mongoose";
 let isConnected: boolean = false;
 
 export const ConnectDB = async () => {
